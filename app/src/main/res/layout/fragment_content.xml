@@ -36,8 +36,24 @@
             app:layout_constraintStart_toStartOf="parent" />
 
 
-    </androidx.appcompat.widget.Toolbar>
 
+    </androidx.appcompat.widget.Toolbar>
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:breakStrategy="high_quality"
+        android:text="Title"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:hyphenationFrequency="full"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -62,38 +78,22 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
-                <TextView
-                    android:id="@+id/titleText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:layout_weight="1.5"
-                    android:layout_gravity="center"
-                    android:ems="10"
-                    android:breakStrategy="simple"
-                    android:hyphenationFrequency="full"
-                    android:gravity="center"
-                    android:maxLength="250"
-                    android:text="@string/exampleTextShort"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
                 <androidx.cardview.widget.CardView
-                    android:layout_width="155dp"
-                    android:layout_height="155dp"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
                     app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="250dp">
+                    >
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
+                        android:layout_width="300dp"
+                        android:layout_height="300dp"
                         android:layout_gravity="center"
-                        app:cardCornerRadius="250dp">
+                       >
 
                         <ImageView
                             android:id="@+id/mainImage"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
+                            android:layout_width="300dp"
+                            android:layout_height="300dp"
                             android:background="@color/black"
                             android:scaleType="centerCrop" />
 
@@ -114,18 +114,93 @@
                     </androidx.cardview.widget.CardView>
 
                 </androidx.cardview.widget.CardView>
-
+                <ImageView
+                    android:id="@+id/download"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="center_vertical"
+                    app:srcCompat="@drawable/baseline_content_copy_24"
+                    app:tint="@color/white"
+                    tools:srcCompat="@drawable/baseline_download_24" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/mainText"
+                android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:breakStrategy="high_quality"
-                android:text="@string/exampleLongText"
+                android:text="Имя"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:hyphenationFrequency="full"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:breakStrategy="high_quality"
+                android:text="Рейтинг"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:hyphenationFrequency="full"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:breakStrategy="high_quality"
+                android:text="Время загрузки"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:hyphenationFrequency="full"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:breakStrategy="high_quality"
+                android:text="Ссылка"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:hyphenationFrequency="full"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/similar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:breakStrategy="high_quality"
+                android:text="Похожее:"
+                android:gravity="center"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:hyphenationFrequency="full"
@@ -145,64 +220,17 @@
                 android:orientation="horizontal" />
 
 
-            <TextView
-                android:id="@+id/contactTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:paddingTop="15dp"
-                android:text="@string/contacts"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:gravity="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <LinearLayout
-                android:id="@+id/contactsLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingStart="15dp"
-                android:paddingTop="10dp"
-                android:paddingEnd="15dp"
-                android:paddingBottom="10dp"
-                app:layout_constraintBottom_toTopOf="@+id/Text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
 
 
-                <ImageView
-                    android:id="@+id/copyContact"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/baseline_content_copy_24"
-                    app:tint="@color/white"
-                    tools:srcCompat="@android:drawable/ic_menu_share" />
 
-                <TextView
-                    android:id="@+id/contactText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:layout_weight="1.5"
-                    android:ems="10"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:maxLength="250"
-                    android:singleLine="true"
-                    android:text="@string/emailTextExample"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
+
+
+
+
+
             </LinearLayout>
 
-        </LinearLayout>
+
 
     </ScrollView>
 

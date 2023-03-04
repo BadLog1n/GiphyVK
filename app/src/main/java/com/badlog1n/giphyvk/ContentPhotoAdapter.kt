@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.badlog1n.giphyvk.databinding.ImgItemBinding
 import com.bumptech.glide.Glide
@@ -13,11 +14,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ContentPhotoAdapter : RecyclerView.Adapter<ContentPhotoAdapter.PhotoHolder>() {
+class ContentPhotoAdapter(
+    private val listener: RecyclerViewEvent
+) : RecyclerView.Adapter<ContentPhotoAdapter.PhotoHolder>() {
     var recordsList = ArrayList<GifData>()
-
-    class PhotoHolder(item: View) : RecyclerView.ViewHolder(item) {
+    class PhotoHolder(item: View, listener: RecyclerViewEvent) : RecyclerView.ViewHolder(item), View.OnClickListener {
         private val binding = ImgItemBinding.bind(item)
+        private val localListener = listener
 
         fun bind(photoRecord: GifData) {
             CoroutineScope(Dispatchers.Main).launch {
@@ -53,19 +56,16 @@ class ContentPhotoAdapter : RecyclerView.Adapter<ContentPhotoAdapter.PhotoHolder
                 } catch (e: Exception) {
                     binding.imgProgress.visibility = View.GONE
                 }
-
-                //if load then hide progress
-                /*try {
-                    val imageRef = Firebase.storage.reference
-                    val maxDownloadSize = 5L * 1024 * 1024 * 1024
-                    val bytes =
-                        imageRef.child("1/${photoRecord.uri}").getBytes(maxDownloadSize).await()
-                    val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-                    binding.image.setImageBitmap(bmp)
-                    binding.imgProgress.visibility = View.GONE
-                } catch (_: Exception) {
-                }*/
             }
+        }
+        init {
+            binding.image.setOnClickListener(this)
+
+        }
+
+        override fun onClick(p0: View?) {
+            val image = binding.image
+            localListener.onItemClicked(image)
         }
 
     }
@@ -78,7 +78,7 @@ class ContentPhotoAdapter : RecyclerView.Adapter<ContentPhotoAdapter.PhotoHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.img_item, parent, false)
 
-        return PhotoHolder(view)
+        return PhotoHolder(view, listener)
     }
 
     override fun onBindViewHolder(holder: PhotoHolder, position: Int) {
@@ -94,5 +94,8 @@ class ContentPhotoAdapter : RecyclerView.Adapter<ContentPhotoAdapter.PhotoHolder
         notifyItemRangeRemoved(0, recordsList.size)
     }
 
+    interface RecyclerViewEvent {
+        fun onItemClicked(image: ImageView)
+    }
 }
 

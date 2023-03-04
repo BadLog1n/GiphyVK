@@ -9,10 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.badlog1n.giphyvk.databinding.FragmentSearchBinding
 import kotlinx.coroutines.Dispatchers
@@ -24,8 +25,8 @@ import org.jsoup.Connection
 import org.jsoup.Jsoup
 
 
-class SearchFragment : Fragment() {
-    private var rcAdapter = ContentPhotoAdapter()
+class SearchFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
+    private var rcAdapter = ContentPhotoAdapter(this)
     private val searchApi = SearchApi()
     private var offset = 0
     private lateinit var binding: FragmentSearchBinding
@@ -125,6 +126,10 @@ class SearchFragment : Fragment() {
     private fun View.hideKeyboard() {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken, 0)
+    }
+
+    override fun onItemClicked(image: ImageView) {
+        Toast.makeText(requireContext(), "text", Toast.LENGTH_SHORT).show()
     }
 
 
