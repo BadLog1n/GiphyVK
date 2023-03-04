@@ -42,7 +42,7 @@ class SearchFragment : Fragment() {
 
 
 
-        binding.question.setOnClickListener {
+/*        binding.question.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())
             builder.setTitle("О приложении")
             builder.setMessage("Чтобы перейти к описанию объекта, введите код в поле ниже и нажмите кнопку \"далее\"")
@@ -58,7 +58,7 @@ class SearchFragment : Fragment() {
             }
             builder.show()
 
-        }
+        }*/
     }
 
     private fun View.hideKeyboard() {
