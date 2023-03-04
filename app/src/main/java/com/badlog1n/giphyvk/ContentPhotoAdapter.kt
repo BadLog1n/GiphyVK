@@ -1,29 +1,56 @@
 package com.badlog1n.giphyvk
 
-import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.badlog1n.giphyvk.databinding.ImgItemBinding
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ContentPhotoAdapter : RecyclerView.Adapter<ContentPhotoAdapter.PhotoHolder>() {
     var recordsList = ArrayList<GifData>()
+
     class PhotoHolder(item: View) : RecyclerView.ViewHolder(item) {
         private val binding = ImgItemBinding.bind(item)
 
         fun bind(photoRecord: GifData) {
             CoroutineScope(Dispatchers.Main).launch {
                 try {
+                    binding.imgProgress.visibility = View.VISIBLE
+
                     Glide.with(binding.root)
                         .load(photoRecord.url)
+                        .listener(object : RequestListener<Drawable> {
+                            override fun onLoadFailed(
+                                e: GlideException?,
+                                model: Any?,
+                                target: com.bumptech.glide.request.target.Target<Drawable>?,
+                                isFirstResource: Boolean
+                            ): Boolean {
+                                binding.imgProgress.visibility = View.GONE
+                                return false
+                            }
+
+                            override fun onResourceReady(
+                                resource: Drawable?,
+                                model: Any?,
+                                target: com.bumptech.glide.request.target.Target<Drawable>?,
+                                dataSource: com.bumptech.glide.load.DataSource?,
+                                isFirstResource: Boolean
+                            ): Boolean {
+                                binding.imgProgress.visibility = View.GONE
+                                return false
+                            }
+
+                        })
                         .into(binding.image)
-                }
-                finally {
+                } catch (e: Exception) {
                     binding.imgProgress.visibility = View.GONE
                 }
 

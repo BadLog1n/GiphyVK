@@ -2,6 +2,8 @@ package com.badlog1n.giphyvk
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -42,52 +44,13 @@ class SearchFragment : Fragment() {
             LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
         accommRc.layoutManager = GridLayoutManager(context, 3)
 
-
-
-
-
-        /* database = FirebaseDatabase.getInstance().getReference("key")
-         binding.submit.setOnClickListener {
-             val inputCode = binding.codeInputText.text
-             if (inputCode.toString().isNotEmpty()) {
-                 database.child(inputCode.toString()).get().addOnSuccessListener {
-                     if (it.exists()) {
-                         getAllData(inputCode.toString(), it)
-                         inputCode.clear()
-                         view.hideKeyboard()
-                         view.findNavController().navigate(R.id.contentFragment)
-                     } else Toast.makeText(requireContext(), "Код не найден", Toast.LENGTH_SHORT)
-                         .show()
-                 }
-             } else Toast.makeText(requireContext(), "Код не может быть пустым", Toast.LENGTH_SHORT)
-                 .show()*/
-
-
-/*        binding.question.setOnClickListener {
-            val builder = AlertDialog.Builder(requireContext())
-            builder.setTitle("О приложении")
-            builder.setMessage("Чтобы перейти к описанию объекта, введите код в поле ниже и нажмите кнопку \"далее\"")
-            builder.setPositiveButton("OK") { _, _ -> }
-            builder.setNeutralButton("GitHub") { _, _ ->
-                val openLink = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/badlog1n"))
-                startActivity(openLink)
-            }
-            builder.setNegativeButton("GitHub проекта") { _, _ ->
-                val openLink =
-                    Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/badlog1n/Pictale"))
-                startActivity(openLink)
-            }
-            builder.show()
-
-        }*/
-
-        fun loadData() {
+        fun loadData(search: String, offset: String) {
             try {
                 lifecycleScope.launch {
                     withContext(Dispatchers.IO) {
                         val document: String
                         val sitePath =
-                            "https://api.giphy.com/v1/gifs/search?api_key=OxaksPzPsdh9Qti793UkoLDrr3LARbpT&q=search&limit=25&rating=g&lang=ru"
+                            "https://api.giphy.com/v1/gifs/search?api_key=OxaksPzPsdh9Qti793UkoLDrr3LARbpT&q=$search&limit=25&offset=$offset&rating=g&lang=en"
 
                         val response: Connection.Response = Jsoup.connect(sitePath)
                             .ignoreContentType(true)
@@ -111,9 +74,7 @@ class SearchFragment : Fragment() {
                         withContext(Dispatchers.Main) {
                             binding.progressBar.visibility = View.GONE
                             binding.imagesRcView.visibility = View.VISIBLE
-                            rcAdapter.clearRecords()
                             for (item in result) {
-                                rcAdapter.addPhotoRecord(item)
 
                                 if (binding.searchEdit.text.isNotBlank()
                                     && binding.searchEdit.text.isNotEmpty()
@@ -121,9 +82,8 @@ class SearchFragment : Fragment() {
                                     rcAdapter.addPhotoRecord(item)
                                 }
                             }
-                            if (rcAdapter.itemCount == 0) {
-                                binding.foundtv.text = "Ничего не найдено"
-                            }
+                            binding.foundtv.text = if (rcAdapter.itemCount != 0) "Найдено:" else "Ничего не найдено"
+
                         }
 
                     }
@@ -133,7 +93,22 @@ class SearchFragment : Fragment() {
             }
         }
 
-        loadData()
+        binding.searchEdit.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                binding.progressBar.visibility = View.VISIBLE
+                rcAdapter.clearRecords()
+                loadData(binding.searchEdit.text.toString(), "0")
+
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+        })
 
 
     }
