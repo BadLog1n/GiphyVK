@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -42,8 +41,6 @@ class SearchFragment : Fragment() {
 
         val accommRc: RecyclerView = view.findViewById(R.id.imagesRcView)
         accommRc.adapter = rcAdapter
-        val linearLayoutManager =
-            LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
         accommRc.layoutManager = GridLayoutManager(context, 3)
 
         fun loadData(search: String, offset: Int) {
@@ -84,7 +81,8 @@ class SearchFragment : Fragment() {
                                     rcAdapter.addPhotoRecord(item)
                                 }
                             }
-                            binding.foundtv.text = if (rcAdapter.itemCount != 0) "Найдено:" else "Ничего не найдено"
+                            binding.foundtv.text =
+                                if (rcAdapter.itemCount != 0) "Найдено:" else "Ничего не найдено"
 
                         }
 
@@ -100,13 +98,14 @@ class SearchFragment : Fragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
                 binding.progressBar.visibility = View.VISIBLE
                 rcAdapter.clearRecords()
                 offset = 0
                 loadData(binding.searchEdit.text.toString(), offset)
-            }
-
-            override fun afterTextChanged(s: Editable?) {
             }
 
         })
@@ -120,8 +119,6 @@ class SearchFragment : Fragment() {
                 }
             }
         })
-
-
     }
 
 
@@ -129,27 +126,6 @@ class SearchFragment : Fragment() {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken, 0)
     }
-/*
-
-    private fun getAllData(inputCode: String, it: DataSnapshot) {
-        val sharedPref: SharedPreferences? = activity?.getSharedPreferences(
-            getString(R.string.sharedPref), Context.MODE_PRIVATE
-        )
-        val editor: SharedPreferences.Editor? = sharedPref?.edit()
-        val map: MutableMap<String, String> = HashMap()
-        map[getString(R.string.titleValue)] = it.child("title").value.toString()
-        map[getString(R.string.mainTextValue)] = it.child("mainText").value.toString()
-        map[getString(R.string.emailTextValue)] = it.child("email").value.toString()
-        map[getString(R.string.photoPathValue)] = it.child("photo").value.toString()
-        map[getString(R.string.codeValue)] = inputCode
-        map[getString(R.string.imageTitleValue)] = it.child("imageTitle").value.toString()
-        map[getString(R.string.contactValue)] = it.child("contact").value.toString()
-        for ((key, value) in map) {
-            editor?.putString(key, value)
-        }
-
-        editor?.apply()
-*/
 
 
 }
