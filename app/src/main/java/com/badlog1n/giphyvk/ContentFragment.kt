@@ -41,11 +41,11 @@ class ContentFragment : Fragment() {
         imageRc.adapter = rcAdapter
         rcAdapter.recordsList = ArrayList()
         val photoPathSplit = if (photoPath != "null") photoPath.split(";") else null
-        photoPathSplit?.forEach { item ->
+/*        photoPathSplit?.forEach { item ->
             rcAdapter.addPhotoRecord(
                 PhotoRecord(item)
             )
-        }
+        }*/
         rcAdapter.notifyItemChanged(rcAdapter.itemCount)
         val linearLayoutManager =
             LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, true)

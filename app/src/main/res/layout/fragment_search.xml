@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/codeInputText"
+            android:id="@+id/searchEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_edittext"
@@ -36,15 +36,43 @@
             android:textColor="@color/white"
             android:textSize="20sp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-
-            android:id="@+id/imagesRcView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/searchResultsLinearLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="horizontal"
-            tools:listitem="@layout/img_item" />
+            android:layout_marginStart="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/foundtv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Найдено:"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible" />
+
+            <androidx.recyclerview.widget.RecyclerView
+
+                android:id="@+id/imagesRcView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="horizontal"
+                tools:listitem="@layout/img_item" />
+        </LinearLayout>
+
+
+
     </LinearLayout>
 
 </LinearLayout>
