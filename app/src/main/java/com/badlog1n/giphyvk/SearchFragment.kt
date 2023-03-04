@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -101,13 +102,20 @@ class SearchFragment : Fragment() {
                 binding.progressBar.visibility = View.VISIBLE
                 rcAdapter.clearRecords()
                 loadData(binding.searchEdit.text.toString(), "0")
-
-
             }
 
             override fun afterTextChanged(s: Editable?) {
             }
 
+        })
+
+        accommRc.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerView.canScrollVertically(1)) {
+                    loadData(binding.searchEdit.text.toString(), rcAdapter.itemCount.toString())
+                }
+            }
         })
 
 
