@@ -40,7 +40,9 @@ class SearchFragment : Fragment() {
         accommRc.adapter = rcAdapter
         val linearLayoutManager =
             LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
-        accommRc.layoutManager = GridLayoutManager(context, 2)
+        accommRc.layoutManager = GridLayoutManager(context, 3)
+
+
 
 
 

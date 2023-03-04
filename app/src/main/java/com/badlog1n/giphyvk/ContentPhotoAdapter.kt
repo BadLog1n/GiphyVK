@@ -20,7 +20,7 @@ class ContentPhotoAdapter : RecyclerView.Adapter<ContentPhotoAdapter.PhotoHolder
             CoroutineScope(Dispatchers.Main).launch {
                 try {
                     Glide.with(binding.root)
-                        .load("https://lh6.ggpht.com/9SZhHdv4URtBzRmXpnWxZcYhkgTQurFuuQ8OR7WZ3R7fyTmha77dYkVvcuqMu3DLvMQ=w300")
+                        .load(photoRecord.url)
                         .into(binding.image)
                 }
                 finally {

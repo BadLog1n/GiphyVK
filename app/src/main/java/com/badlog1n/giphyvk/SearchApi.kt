@@ -6,20 +6,11 @@ import org.json.JSONArray
 class SearchApi {
     fun returnJson(jsonArray: JSONArray): ArrayList<GifData> {
         val list = ArrayList<GifData>()
-        for (i in 1 until jsonArray.length()) {
+        for (i in 0 until jsonArray.length()) {
             try {
-                val jsonObject = "none"
-                val name = "none"
-                val fedDistrict = "none"
-                val region = "none"
-                val city = "none"
-                val photo = "none"
-                val cost = "none"
-                val organization = "none"
-                val type = "none"
-                val food = "none"
-                val sort = "none"
-                list.add(GifData(name, fedDistrict, region, city, photo, cost, organization, type, food, sort))
+                val jsonObject = jsonArray.getJSONObject(i)
+                val url = jsonObject.getJSONObject("images").getJSONObject("fixed_width_small").getString("url")
+                list.add(GifData(url))
             }
             catch (e: Exception) {
                 continue
