@@ -72,6 +72,7 @@ class ContentPhotoAdapter : RecyclerView.Adapter<ContentPhotoAdapter.PhotoHolder
 
     fun addPhotoRecord(feedRecord: GifData) {
         recordsList.add(feedRecord)
+        notifyItemChanged(recordsList.size - 1)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoHolder {

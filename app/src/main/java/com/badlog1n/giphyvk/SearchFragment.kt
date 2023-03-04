@@ -28,6 +28,7 @@ import org.jsoup.Jsoup
 class SearchFragment : Fragment() {
     private var rcAdapter = ContentPhotoAdapter()
     private val searchApi = SearchApi()
+    private var offset = 0
     private lateinit var binding: FragmentSearchBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -45,7 +46,7 @@ class SearchFragment : Fragment() {
             LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
         accommRc.layoutManager = GridLayoutManager(context, 3)
 
-        fun loadData(search: String, offset: String) {
+        fun loadData(search: String, offset: Int) {
             try {
                 lifecycleScope.launch {
                     withContext(Dispatchers.IO) {
@@ -101,7 +102,8 @@ class SearchFragment : Fragment() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 binding.progressBar.visibility = View.VISIBLE
                 rcAdapter.clearRecords()
-                loadData(binding.searchEdit.text.toString(), "0")
+                offset = 0
+                loadData(binding.searchEdit.text.toString(), offset)
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -113,7 +115,8 @@ class SearchFragment : Fragment() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1)) {
-                    loadData(binding.searchEdit.text.toString(), rcAdapter.itemCount.toString())
+                    offset += 25
+                    loadData(binding.searchEdit.text.toString(), offset)
                 }
             }
         })
