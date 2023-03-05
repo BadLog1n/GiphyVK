@@ -168,6 +168,17 @@ class ContentFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
 
 
         }
+
+        binding.download.setOnClickListener {
+            if (bundle != null) {
+                val url = bundle.getString("bigGif")
+                if (url != null) {
+                    (activity as MainActivity).downloadGif(url, bundle.getString("title")!!)
+                }
+            }
+        }
+
+
         super.onViewCreated(view, savedInstanceState)
 
 
