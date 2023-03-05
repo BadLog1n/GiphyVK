@@ -3,10 +3,9 @@ package com.badlog1n.giphyvk
 import android.app.DownloadManager
 import android.content.Context
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
-import androidx.navigation.NavController
+import androidx.appcompat.app.AppCompatActivity
 import com.badlog1n.giphyvk.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

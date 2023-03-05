@@ -18,9 +18,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class ContentFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
+class ContentFragment : Fragment() {
     private lateinit var binding: FragmentContentBinding
-    private var rcAdapter = ContentPhotoAdapter(this)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -41,8 +40,7 @@ class ContentFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
                 try {
                     binding.toImgProgress.visibility = View.VISIBLE
 
-                    Glide.with(binding.root)
-                        .load(bundle.getString("bigGif"))
+                    Glide.with(binding.root).load(bundle.getString("bigGif"))
                         .listener(object : RequestListener<Drawable> {
                             override fun onLoadFailed(
                                 e: GlideException?,
@@ -65,16 +63,14 @@ class ContentFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
                                 return false
                             }
 
-                        })
-                        .into(binding.mainImage)
+                        }).into(binding.mainImage)
                 } catch (e: Exception) {
                     binding.toImgProgress.visibility = View.GONE
                 }
                 try {
                     binding.downSizedProgress.visibility = View.VISIBLE
 
-                    Glide.with(binding.root)
-                        .load(bundle.getString("downSized"))
+                    Glide.with(binding.root).load(bundle.getString("downSized"))
                         .listener(object : RequestListener<Drawable> {
                             override fun onLoadFailed(
                                 e: GlideException?,
@@ -97,8 +93,7 @@ class ContentFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
                                 return false
                             }
 
-                        })
-                        .into(binding.downSized)
+                        }).into(binding.downSized)
                 } catch (e: Exception) {
 
                     binding.downSizedProgress.visibility = View.GONE
@@ -106,8 +101,7 @@ class ContentFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
                 try {
                     binding.fixedHeightProgress.visibility = View.VISIBLE
 
-                    Glide.with(binding.root)
-                        .load(bundle.getString("fixed_height"))
+                    Glide.with(binding.root).load(bundle.getString("fixed_height"))
                         .listener(object : RequestListener<Drawable> {
                             override fun onLoadFailed(
                                 e: GlideException?,
@@ -130,16 +124,14 @@ class ContentFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
                                 return false
                             }
 
-                        })
-                        .into(binding.fixedHeight)
+                        }).into(binding.fixedHeight)
                 } catch (e: Exception) {
                     binding.fixedHeightProgress.visibility = View.GONE
                 }
                 try {
                     binding.previewProgress.visibility = View.VISIBLE
 
-                    Glide.with(binding.root)
-                        .load(bundle.getString("preview"))
+                    Glide.with(binding.root).load(bundle.getString("preview"))
                         .listener(object : RequestListener<Drawable> {
                             override fun onLoadFailed(
                                 e: GlideException?,
@@ -162,8 +154,7 @@ class ContentFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
                                 return false
                             }
 
-                        })
-                        .into(binding.preview)
+                        }).into(binding.preview)
                 } catch (e: Exception) {
                     binding.previewProgress.visibility = View.GONE
                 }
@@ -181,61 +172,49 @@ class ContentFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
             }
         }
 
-        binding.downSized.setOnClickListener{
-            AlertDialog.Builder(context)
-                .setTitle("Загрузка")
-                .setMessage("Вы хотите скачать эту гифку?")
-                .setPositiveButton("Да") { dialog, which ->
+        binding.downSized.setOnClickListener {
+            AlertDialog.Builder(context).setTitle("Загрузка")
+                .setMessage("Вы хотите скачать эту гифку?").setPositiveButton("Да") { _, _ ->
                     if (bundle != null) {
                         val url = bundle.getString("downSized")
                         if (url != null) {
                             (activity as MainActivity).downloadGif(url, bundle.getString("title")!!)
                         }
                     }
-                }
-                .setNegativeButton("Нет") { dialog, _ ->
+                }.setNegativeButton("Нет") { dialog, _ ->
                     dialog.dismiss()
-                }
-                .show()
+                }.show()
         }
 
-        binding.fixedHeight.setOnClickListener{
-            AlertDialog.Builder(context)
-                .setTitle("Загрузка")
-                .setMessage("Вы хотите скачать эту гифку?")
-                .setPositiveButton("Да") { dialog, which ->
+        binding.fixedHeight.setOnClickListener {
+            AlertDialog.Builder(context).setTitle("Загрузка")
+                .setMessage("Вы хотите скачать эту гифку?").setPositiveButton("Да") { _, _ ->
                     if (bundle != null) {
                         val url = bundle.getString("fixedHeight")
                         if (url != null) {
                             (activity as MainActivity).downloadGif(url, bundle.getString("title")!!)
                         }
                     }
-                }
-                .setNegativeButton("Нет") { dialog, _ ->
+                }.setNegativeButton("Нет") { dialog, _ ->
                     dialog.dismiss()
-                }
-                .show()
+                }.show()
         }
 
-        binding.preview.setOnClickListener{
-            AlertDialog.Builder(context)
-                .setTitle("Загрузка")
-                .setMessage("Вы хотите скачать эту гифку?")
-                .setPositiveButton("Да") { dialog, which ->
+        binding.preview.setOnClickListener {
+            AlertDialog.Builder(context).setTitle("Загрузка")
+                .setMessage("Вы хотите скачать эту гифку?").setPositiveButton("Да") { _, _ ->
                     if (bundle != null) {
                         val url = bundle.getString("preview")
                         if (url != null) {
                             (activity as MainActivity).downloadGif(url, bundle.getString("title")!!)
                         }
                     }
-                }
-                .setNegativeButton("Нет") { dialog, _ ->
+                }.setNegativeButton("Нет") { dialog, _ ->
                     dialog.dismiss()
-                }
-                .show()
+                }.show()
         }
 
-        binding.link.setOnClickListener{
+        binding.link.setOnClickListener {
             val url = bundle!!.getString("link")
             if (url != null) {
                 val intent = Intent(Intent.ACTION_VIEW)
@@ -249,9 +228,5 @@ class ContentFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
 
     }
 
-
-    override fun onItemClicked(image: String) {
-        TODO("Not yet implemented")
-    }
 
 }

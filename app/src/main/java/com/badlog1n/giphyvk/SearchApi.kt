@@ -16,15 +16,29 @@ class SearchApi {
                 val time = jsonObject.getString("import_datetime")
                 val rating = jsonObject.getString("rating")
                 val link = jsonObject.getString("url")
-                val bigGif = jsonObject.getJSONObject("images").getJSONObject("original")
-                    .getString("url")
-                val downSized = jsonObject.getJSONObject("images").getJSONObject("downsized")
-                    .getString("url")
-                val downSizedSmall = jsonObject.getJSONObject("images").getJSONObject("fixed_height")
-                    .getString("url")
-                val originalMp4 = jsonObject.getJSONObject("images").getJSONObject("preview_gif")
-                    .getString("url")
-                list.add(GifData(url, title, username, rating, time, link, bigGif, downSized, downSizedSmall, originalMp4))
+                val bigGif =
+                    jsonObject.getJSONObject("images").getJSONObject("original").getString("url")
+                val downSized =
+                    jsonObject.getJSONObject("images").getJSONObject("downsized").getString("url")
+                val downSizedSmall =
+                    jsonObject.getJSONObject("images").getJSONObject("fixed_height")
+                        .getString("url")
+                val originalMp4 =
+                    jsonObject.getJSONObject("images").getJSONObject("preview_gif").getString("url")
+                list.add(
+                    GifData(
+                        url,
+                        title,
+                        username,
+                        rating,
+                        time,
+                        link,
+                        bigGif,
+                        downSized,
+                        downSizedSmall,
+                        originalMp4
+                    )
+                )
             } catch (e: Exception) {
                 Log.d("Error", e.toString())
                 continue

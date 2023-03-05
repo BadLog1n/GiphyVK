@@ -53,16 +53,15 @@ class SearchFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
                         val sitePath =
                             "https://api.giphy.com/v1/gifs/search?api_key=OxaksPzPsdh9Qti793UkoLDrr3LARbpT&q=$search&limit=25&offset=$offset&rating=g&lang=en"
 
-                        val response: Connection.Response = Jsoup.connect(sitePath)
-                            .ignoreContentType(true)
-                            .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.21 (KHTML, like Gecko) Chrome/19.0.1042.0 Safari/535.21")
-                            .timeout(10000).execute()
+                        val response: Connection.Response =
+                            Jsoup.connect(sitePath).ignoreContentType(true)
+                                .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.21 (KHTML, like Gecko) Chrome/19.0.1042.0 Safari/535.21")
+                                .timeout(10000).execute()
 
                         val statusCode: Int = response.statusCode()
 
                         if (statusCode == 200) {
-                            document =
-                                Jsoup.connect(sitePath).ignoreContentType(true).get().text()
+                            document = Jsoup.connect(sitePath).ignoreContentType(true).get().text()
                         } else throw Exception("Error")
 
                         //convert document to jsonObject then to jsonArray
@@ -80,9 +79,7 @@ class SearchFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
                             binding.imagesRcView.visibility = View.VISIBLE
                             for (item in result) {
 
-                                if (binding.searchEdit.text.isNotBlank()
-                                    && binding.searchEdit.text.isNotEmpty()
-                                ) {
+                                if (binding.searchEdit.text.isNotBlank() && binding.searchEdit.text.isNotEmpty()) {
                                     rcAdapter.addPhotoRecord(item)
                                 }
                             }
