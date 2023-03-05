@@ -13,17 +13,19 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-var recordsList = ArrayList<GifData>()
 
 class ContentPhotoAdapter(
     private val listener: RecyclerViewEvent
 ) : RecyclerView.Adapter<ContentPhotoAdapter.PhotoHolder>() {
+    private var recordsList = ArrayList<GifData>()
+
     class PhotoHolder(item: View, listener: RecyclerViewEvent) : RecyclerView.ViewHolder(item),
         View.OnClickListener {
         private val binding = ImgItemBinding.bind(item)
         private val localListener = listener
 
         fun bind(photoRecord: GifData) {
+            binding.imageUrl.text = photoRecord.url
             CoroutineScope(Dispatchers.Main).launch {
                 try {
                     binding.imgProgress.visibility = View.VISIBLE
@@ -66,7 +68,7 @@ class ContentPhotoAdapter(
         }
 
         override fun onClick(p0: View?) {
-            val imageUrl = recordsList[adapterPosition].url
+            val imageUrl = binding.imageUrl.text.toString()
             localListener.onItemClicked(imageUrl)
         }
 

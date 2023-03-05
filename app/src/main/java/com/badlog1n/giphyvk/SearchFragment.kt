@@ -31,6 +31,7 @@ class SearchFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
     private val searchApi = SearchApi()
     private var offset = 0
     private lateinit var result: ArrayList<GifData>
+    private var globalResult: ArrayList<GifData> = ArrayList()
     private lateinit var binding: FragmentSearchBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -72,7 +73,10 @@ class SearchFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
                         //convert jsonObject to jsonArray
                         val jsonArray = JSONArray(jsonObject.getString("data"))
 
+
                         result = searchApi.returnJson(jsonArray)
+                        globalResult += result
+
                         withContext(Dispatchers.Main) {
                             binding.progressBar.visibility = View.GONE
                             binding.imagesRcView.visibility = View.VISIBLE
@@ -132,7 +136,7 @@ class SearchFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
 
     override fun onItemClicked(image: String) {
         val bundle = Bundle()
-        val gifData = result.find { it.url == image }
+        val gifData = globalResult.find { it.url == image }
         bundle.putString("url", image)
         bundle.putString("title", gifData?.title)
         bundle.putString("name", gifData?.name)
