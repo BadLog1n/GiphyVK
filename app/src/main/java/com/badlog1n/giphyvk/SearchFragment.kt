@@ -65,13 +65,8 @@ class SearchFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
                         if (statusCode == 200) {
                             document = Jsoup.connect(sitePath).ignoreContentType(true).get().text()
                         } else throw Exception("Error")
-
-                        //convert document to jsonObject then to jsonArray
-
                         val jsonObject = JSONObject(document)
-                        //convert jsonObject to jsonArray
                         val jsonArray = JSONArray(jsonObject.getString("data"))
-
 
                         result = searchApi.returnJson(jsonArray)
                         globalResult += result
