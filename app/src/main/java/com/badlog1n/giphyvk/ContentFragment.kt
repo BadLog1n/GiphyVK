@@ -23,18 +23,43 @@ import java.net.URISyntaxException
 class ContentFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
     private lateinit var binding: FragmentContentBinding
     private var rcAdapter = ContentPhotoAdapter(this)
-    private lateinit var code: String
-    private lateinit var photoPath: String
-    private lateinit var contactValue: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentContentBinding.inflate(layoutInflater, container, false)
         return binding.root
 
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //        bundle.putString("url", image)
+        //        bundle.putString("title", gifData?.title)
+        //        bundle.putString("name", gifData?.name)
+        //        bundle.putString("rating", gifData?.rating)
+        //        bundle.putString("time", gifData?.time)
+        //        bundle.putString("link", gifData?.link)
+        val bundle = this.arguments
+        if (bundle != null) {
+            binding.title.text = bundle.getString("title")
+            binding.name.text = bundle.getString("name")
+            binding.rating.text = bundle.getString("rating")
+            binding.time.text = bundle.getString("time")
+            binding.link.text = bundle.getString("link")
+/*            val imageRc: RecyclerView = view.findViewById(R.id.imagesRcView)
+            imageRc.adapter = rcAdapter
+            rcAdapter.recordsList = ArrayList()
+            val photoPathSplit = bundle.getString("url")?.split(";")
+            photoPathSplit?.forEach { item ->
+                rcAdapter.addPhotoRecord(
+                    PhotoRecord(item)
+                )
+            }
+            rcAdapter.notifyItemChanged(rcAdapter.itemCount)
+            val linearLayoutManager =
+                LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, true)
+            linearLayoutManager.stackFromEnd = true
+            imageRc.layoutManager = linearLayoutManager*/
+
+        }
         super.onViewCreated(view, savedInstanceState)
 
 
