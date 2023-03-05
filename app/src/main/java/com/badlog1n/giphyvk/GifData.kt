@@ -10,6 +10,6 @@ data class GifData(
     val link: String,
     val bigGif: String,
     val downSized: String,
-    val downSizedSmall: String,
-    val originalMp4: String,
+    val fixed_height: String,
+    val preview: String,
 )

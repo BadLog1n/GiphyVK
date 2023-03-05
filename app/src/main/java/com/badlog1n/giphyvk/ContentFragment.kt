@@ -101,10 +101,10 @@ class ContentFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
                     binding.downSizedProgress.visibility = View.GONE
                 }
                 try {
-                    binding.downSizedSmallProgress.visibility = View.VISIBLE
+                    binding.fixedHeightProgress.visibility = View.VISIBLE
 
                     Glide.with(binding.root)
-                        .load(bundle.getString("downSizedSmall"))
+                        .load(bundle.getString("fixed_height"))
                         .listener(object : RequestListener<Drawable> {
                             override fun onLoadFailed(
                                 e: GlideException?,
@@ -112,7 +112,7 @@ class ContentFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
                                 target: com.bumptech.glide.request.target.Target<Drawable>?,
                                 isFirstResource: Boolean
                             ): Boolean {
-                                binding.downSizedSmallProgress.visibility = View.GONE
+                                binding.fixedHeightProgress.visibility = View.GONE
                                 return false
                             }
 
@@ -123,20 +123,20 @@ class ContentFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
                                 dataSource: com.bumptech.glide.load.DataSource?,
                                 isFirstResource: Boolean
                             ): Boolean {
-                                binding.downSizedSmallProgress.visibility = View.GONE
+                                binding.fixedHeightProgress.visibility = View.GONE
                                 return false
                             }
 
                         })
-                        .into(binding.downSizedSmall)
+                        .into(binding.fixedHeight)
                 } catch (e: Exception) {
-                    binding.downSizedSmallProgress.visibility = View.GONE
+                    binding.fixedHeightProgress.visibility = View.GONE
                 }
                 try {
-                    binding.originalMp4Progress.visibility = View.VISIBLE
+                    binding.previewProgress.visibility = View.VISIBLE
 
                     Glide.with(binding.root)
-                        .load(bundle.getString("originalMp4"))
+                        .load(bundle.getString("preview"))
                         .listener(object : RequestListener<Drawable> {
                             override fun onLoadFailed(
                                 e: GlideException?,
@@ -144,7 +144,7 @@ class ContentFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
                                 target: com.bumptech.glide.request.target.Target<Drawable>?,
                                 isFirstResource: Boolean
                             ): Boolean {
-                                binding.originalMp4Progress.visibility = View.GONE
+                                binding.previewProgress.visibility = View.GONE
                                 return false
                             }
 
@@ -155,14 +155,14 @@ class ContentFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
                                 dataSource: com.bumptech.glide.load.DataSource?,
                                 isFirstResource: Boolean
                             ): Boolean {
-                                binding.originalMp4Progress.visibility = View.GONE
+                                binding.previewProgress.visibility = View.GONE
                                 return false
                             }
 
                         })
-                        .into(binding.originalMp4)
+                        .into(binding.preview)
                 } catch (e: Exception) {
-                    binding.originalMp4Progress.visibility = View.GONE
+                    binding.previewProgress.visibility = View.GONE
                 }
             }
 

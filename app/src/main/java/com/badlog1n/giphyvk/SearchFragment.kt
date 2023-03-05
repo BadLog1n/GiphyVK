@@ -144,8 +144,8 @@ class SearchFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
         bundle.putString("link", gifData?.link)
         bundle.putString("bigGif", gifData?.bigGif)
         bundle.putString("downSized", gifData?.downSized)
-        bundle.putString("downSizedSmall", gifData?.downSizedSmall)
-        bundle.putString("originalMp4", gifData?.originalMp4)
+        bundle.putString("fixed_height", gifData?.fixed_height)
+        bundle.putString("preview", gifData?.preview)
 
         view?.findNavController()?.navigate(R.id.action_searchFragment_to_contentFragment, bundle)
         view?.hideKeyboard()
