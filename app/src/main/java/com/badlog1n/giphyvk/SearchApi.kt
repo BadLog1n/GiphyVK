@@ -12,7 +12,8 @@ class SearchApi {
                 val url = jsonObject.getJSONObject("images").getJSONObject("fixed_width_small")
                     .getString("url")
                 val title = jsonObject.getString("title")
-                val username = jsonObject.getJSONObject("user").getString("display_name")
+
+                val username = jsonObject.getString("username")
                 val time = jsonObject.getString("import_datetime")
                 val rating = jsonObject.getString("rating")
                 val link = jsonObject.getString("url")
@@ -40,7 +41,7 @@ class SearchApi {
                     )
                 )
             } catch (e: Exception) {
-                Log.d("Error", e.toString())
+                Log.d("Error in API", e.toString())
                 continue
             }
 
