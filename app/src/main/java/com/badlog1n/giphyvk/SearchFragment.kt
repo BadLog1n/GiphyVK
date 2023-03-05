@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.badlog1n.giphyvk.databinding.FragmentSearchBinding
@@ -29,6 +30,7 @@ class SearchFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
     private var rcAdapter = ContentPhotoAdapter(this)
     private val searchApi = SearchApi()
     private var offset = 0
+    private lateinit var result: ArrayList<GifData>
     private lateinit var binding: FragmentSearchBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -70,7 +72,7 @@ class SearchFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
                         //convert jsonObject to jsonArray
                         val jsonArray = JSONArray(jsonObject.getString("data"))
 
-                        val result = searchApi.returnJson(jsonArray)
+                        result = searchApi.returnJson(jsonArray)
                         withContext(Dispatchers.Main) {
                             binding.progressBar.visibility = View.GONE
                             binding.imagesRcView.visibility = View.VISIBLE
@@ -128,8 +130,17 @@ class SearchFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
         imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
-    override fun onItemClicked(image: ImageView) {
-        Toast.makeText(requireContext(), "text", Toast.LENGTH_SHORT).show()
+    override fun onItemClicked(image: String) {
+        val bundle = Bundle()
+        val gifData = result.find { it.url == image }
+        bundle.putString("url", image)
+        bundle.putString("title", gifData?.title)
+        bundle.putString("name", gifData?.name)
+        bundle.putString("rating", gifData?.rating)
+        bundle.putString("time", gifData?.time)
+        bundle.putString("link", gifData?.link)
+        view?.findNavController()?.navigate(R.id.action_searchFragment_to_contentFragment, bundle)
+
     }
 
 

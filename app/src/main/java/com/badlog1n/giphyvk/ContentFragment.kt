@@ -40,8 +40,9 @@ class ContentFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
 
     }
 
-    override fun onItemClicked(image: ImageView) {
 
+    override fun onItemClicked(image: String) {
+        TODO("Not yet implemented")
     }
 
 }

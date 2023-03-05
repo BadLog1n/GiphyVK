@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.badlog1n.giphyvk.databinding.ImgItemBinding
 import com.bumptech.glide.Glide
@@ -14,11 +13,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+var recordsList = ArrayList<GifData>()
+
 class ContentPhotoAdapter(
     private val listener: RecyclerViewEvent
 ) : RecyclerView.Adapter<ContentPhotoAdapter.PhotoHolder>() {
-    var recordsList = ArrayList<GifData>()
-    class PhotoHolder(item: View, listener: RecyclerViewEvent) : RecyclerView.ViewHolder(item), View.OnClickListener {
+    class PhotoHolder(item: View, listener: RecyclerViewEvent) : RecyclerView.ViewHolder(item),
+        View.OnClickListener {
         private val binding = ImgItemBinding.bind(item)
         private val localListener = listener
 
@@ -58,14 +59,15 @@ class ContentPhotoAdapter(
                 }
             }
         }
+
         init {
             binding.image.setOnClickListener(this)
 
         }
 
         override fun onClick(p0: View?) {
-            val image = binding.image
-            localListener.onItemClicked(image)
+            val imageUrl = recordsList[adapterPosition].url
+            localListener.onItemClicked(imageUrl)
         }
 
     }
@@ -77,7 +79,6 @@ class ContentPhotoAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.img_item, parent, false)
-
         return PhotoHolder(view, listener)
     }
 
@@ -95,7 +96,7 @@ class ContentPhotoAdapter(
     }
 
     interface RecyclerViewEvent {
-        fun onItemClicked(image: ImageView)
+        fun onItemClicked(image: String)
     }
 }
 
