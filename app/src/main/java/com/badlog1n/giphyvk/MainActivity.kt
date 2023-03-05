@@ -10,7 +10,11 @@ import android.os.Environment
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.badlog1n.giphyvk.databinding.ActivityMainBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,13 +51,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun downloadGif(url: String, title: String) {
-        val request = DownloadManager.Request(Uri.parse(url))
-        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
-        request.setTitle("$title.gif")
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "$title.gif")
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                Log.d("test", url.substringBeforeLast("&"))
+                val request = DownloadManager.Request(Uri.parse(url.substringBeforeLast("&")))
+                request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
+                request.setTitle("$title.gif")
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                request.setDestinationInExternalPublicDir(
+                    Environment.DIRECTORY_DOWNLOADS,
+                    "$title.gif"
+                )
 
-        val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-        manager.enqueue(request)
+                val manager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
+                manager.enqueue(request)
+            }
+        }
     }
 }

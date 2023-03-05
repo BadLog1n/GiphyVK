@@ -193,7 +193,7 @@ class ContentFragment : Fragment() {
             AlertDialog.Builder(context).setTitle("Загрузка")
                 .setMessage("Вы хотите скачать эту гифку?").setPositiveButton("Да") { _, _ ->
                     if (bundle != null) {
-                        val url = bundle.getString("fixedHeight")
+                        val url = bundle.getString("fixed_height")
                         if (url != null) {
                             (activity as MainActivity).downloadGif(url, bundle.getString("title")!!)
                         }
