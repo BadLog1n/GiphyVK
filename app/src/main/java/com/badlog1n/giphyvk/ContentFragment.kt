@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.badlog1n.giphyvk.databinding.FragmentContentBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.GlideException
@@ -221,6 +222,10 @@ class ContentFragment : Fragment() {
                 intent.data = Uri.parse(url)
                 startActivity(intent)
             }
+        }
+
+        binding.backAction.setOnClickListener {
+            findNavController().navigateUp()
         }
 
         super.onViewCreated(view, savedInstanceState)
