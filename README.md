@@ -16,7 +16,7 @@
 <ul>
   <li>Android</li>
 	<li>Kotlin, XML</li>
-  <li>Glide, JSoup, Coroutines</li>
+  <li>Glide, JSoup, Coroutines, OkHttp</li>
   <li>Navigation</li>
 	<li>Git</li>
   
