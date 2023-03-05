@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -45,13 +46,13 @@ class SearchFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
         accommRc.adapter = rcAdapter
         accommRc.layoutManager = GridLayoutManager(context, 3)
 
-        fun loadData(search: String, offset: Int) {
+        fun loadData(search: String, offset: Int, rating: String, lang: String) {
             try {
                 lifecycleScope.launch {
                     withContext(Dispatchers.IO) {
                         val document: String
                         val sitePath =
-                            "https://api.giphy.com/v1/gifs/search?api_key=OxaksPzPsdh9Qti793UkoLDrr3LARbpT&q=$search&limit=25&offset=$offset&rating=g&lang=en"
+                            "https://api.giphy.com/v1/gifs/search?api_key=OxaksPzPsdh9Qti793UkoLDrr3LARbpT&q=$search&limit=25&offset=$offset&rating=$rating&lang=$lang"
 
                         val response: Connection.Response =
                             Jsoup.connect(sitePath).ignoreContentType(true)
@@ -107,21 +108,50 @@ class SearchFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
                 binding.progressBar.visibility = View.VISIBLE
                 rcAdapter.clearRecords()
                 offset = 0
-                loadData(binding.searchEdit.text.toString(), offset)
+                loadData(binding.searchEdit.text.toString(), offset, binding.rating.selectedItem.toString(), binding.language.selectedItem.toString())
             }
 
         })
+
+
+
+        binding.language.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                binding.progressBar.visibility = View.VISIBLE
+                rcAdapter.clearRecords()
+                offset = 0
+                loadData(binding.searchEdit.text.toString(), offset, binding.rating.selectedItem.toString(), binding.language.selectedItem.toString())
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
+
+        binding.rating.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                binding.progressBar.visibility = View.VISIBLE
+                rcAdapter.clearRecords()
+                offset = 0
+                loadData(binding.searchEdit.text.toString(), offset, binding.rating.selectedItem.toString(), binding.language.selectedItem.toString())
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
 
         accommRc.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1)) {
                     offset += 25
-                    loadData(binding.searchEdit.text.toString(), offset)
+                    loadData(binding.searchEdit.text.toString(), offset, binding.rating.selectedItem.toString(), binding.language.selectedItem.toString())
                 }
             }
         })
     }
+
+
+
 
 
     private fun View.hideKeyboard() {

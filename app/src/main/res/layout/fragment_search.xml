@@ -22,7 +22,6 @@
             android:ellipsize="end"
             android:ems="10"
             android:enabled="true"
-            android:gravity="center"
             android:autofillHints="false"
             android:layout_gravity="center"
             android:hint="Найти гифку:"
@@ -34,6 +33,24 @@
             android:singleLine="true"
             android:textColor="@color/white"
             android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+
+            android:background="#808080"
+            android:entries="@array/rating" />
+
+        <Spinner
+            android:id="@+id/language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="#808080"
+            android:entries="@array/languages"
+            />
 
         <LinearLayout
             android:id="@+id/searchResultsLinearLayout"
@@ -47,7 +64,7 @@
                 android:id="@+id/foundtv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Найдено:"
+                android:text="Поиск:"
                 android:textColor="#ffffff"
                 android:textSize="18sp"
                 android:textStyle="bold" />

@@ -18,4 +18,44 @@
     <string name="codeValue">codeValue</string>
     <string name="imageTitleValue">imageTitleValue</string>
     <string name="contactValue">contactValue</string>
+    <string-array name="languages">
+        <item>en</item>
+        <item>es</item>
+        <item>pt</item>
+        <item>id</item>
+        <item>fr</item>
+        <item>ar</item>
+        <item>tr</item>
+        <item>th</item>
+        <item>vi</item>
+        <item>de</item>
+        <item>it</item>
+        <item>ja</item>
+        <item>ru</item>
+        <item>ko</item>
+        <item>pl</item>
+        <item>nl</item>
+        <item>ro</item>
+        <item>hu</item>
+        <item>sv</item>
+        <item>cs</item>
+        <item>hi</item>
+        <item>bn</item>
+        <item>da</item>
+        <item>fa</item>
+        <item>tl</item>
+        <item>fi</item>
+        <item>iw</item>
+        <item>ms</item>
+        <item>no</item>
+        <item>uk</item>
+    </string-array>
+    <string-array name="rating">
+        <item>g</item>
+        <item>pg</item>
+        <item>pg-13</item>
+        <item>r</item>
+    </string-array>
+
+
 </resources>
