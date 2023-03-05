@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_gravity="center"
-                android:background="#ffff"
+                android:background="#0000"
                 android:entries="@array/rating" />
 
             <Spinner
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:background="#ffff"
+                android:background="#0000"
                 android:entries="@array/languages" />
         </LinearLayout>
 

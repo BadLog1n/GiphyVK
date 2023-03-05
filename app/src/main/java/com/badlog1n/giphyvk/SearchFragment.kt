@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -113,7 +114,10 @@ class SearchFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
 
         })
 
-
+        val languages = resources.getStringArray(R.array.languages)
+        val arrayAdapterLanguages: ArrayAdapter<Any?> = ArrayAdapter<Any?>(requireContext(), R.layout.spinner_text, languages)
+        arrayAdapterLanguages.setDropDownViewResource(R.layout.spinner_text)
+        binding.language.adapter = arrayAdapterLanguages
 
         binding.language.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -126,6 +130,11 @@ class SearchFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
+
+        val rating = resources.getStringArray(R.array.rating)
+        val arrayAdapterRating: ArrayAdapter<Any?> = ArrayAdapter<Any?>(requireContext(), R.layout.spinner_text, rating)
+        arrayAdapterRating.setDropDownViewResource(R.layout.spinner_text)
+        binding.rating.adapter = arrayAdapterRating
 
         binding.rating.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
