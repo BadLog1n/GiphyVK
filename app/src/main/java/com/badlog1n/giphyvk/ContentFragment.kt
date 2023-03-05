@@ -235,6 +235,14 @@ class ContentFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
                 .show()
         }
 
+        binding.link.setOnClickListener{
+            val url = bundle!!.getString("link")
+            if (url != null) {
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(url)
+                startActivity(intent)
+            }
+        }
 
         super.onViewCreated(view, savedInstanceState)
 
