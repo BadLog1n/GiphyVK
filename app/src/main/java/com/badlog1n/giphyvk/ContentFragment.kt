@@ -1,6 +1,9 @@
 package com.badlog1n.giphyvk
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -176,6 +179,60 @@ class ContentFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
                     (activity as MainActivity).downloadGif(url, bundle.getString("title")!!)
                 }
             }
+        }
+
+        binding.downSized.setOnClickListener{
+            AlertDialog.Builder(context)
+                .setTitle("Загрузка")
+                .setMessage("Вы хотите скачать эту гифку?")
+                .setPositiveButton("Да") { dialog, which ->
+                    if (bundle != null) {
+                        val url = bundle.getString("downSized")
+                        if (url != null) {
+                            (activity as MainActivity).downloadGif(url, bundle.getString("title")!!)
+                        }
+                    }
+                }
+                .setNegativeButton("Нет") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
+        }
+
+        binding.fixedHeight.setOnClickListener{
+            AlertDialog.Builder(context)
+                .setTitle("Загрузка")
+                .setMessage("Вы хотите скачать эту гифку?")
+                .setPositiveButton("Да") { dialog, which ->
+                    if (bundle != null) {
+                        val url = bundle.getString("fixedHeight")
+                        if (url != null) {
+                            (activity as MainActivity).downloadGif(url, bundle.getString("title")!!)
+                        }
+                    }
+                }
+                .setNegativeButton("Нет") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
+        }
+
+        binding.preview.setOnClickListener{
+            AlertDialog.Builder(context)
+                .setTitle("Загрузка")
+                .setMessage("Вы хотите скачать эту гифку?")
+                .setPositiveButton("Да") { dialog, which ->
+                    if (bundle != null) {
+                        val url = bundle.getString("preview")
+                        if (url != null) {
+                            (activity as MainActivity).downloadGif(url, bundle.getString("title")!!)
+                        }
+                    }
+                }
+                .setNegativeButton("Нет") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
         }
 
 
