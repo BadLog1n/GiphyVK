@@ -135,6 +135,7 @@ class SearchFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
     override fun onItemClicked(image: String) {
         val bundle = Bundle()
         val gifData = globalResult.find { it.url == image }
+
         bundle.putString("url", image)
         bundle.putString("title", gifData?.title)
         bundle.putString("name", gifData?.name)
@@ -142,6 +143,10 @@ class SearchFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
         bundle.putString("time", gifData?.time)
         bundle.putString("link", gifData?.link)
         bundle.putString("bigGif", gifData?.bigGif)
+        bundle.putString("downSized", gifData?.downSized)
+        bundle.putString("downSizedSmall", gifData?.downSizedSmall)
+        bundle.putString("originalMp4", gifData?.originalMp4)
+
         view?.findNavController()?.navigate(R.id.action_searchFragment_to_contentFragment, bundle)
         view?.hideKeyboard()
 

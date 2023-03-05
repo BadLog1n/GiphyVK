@@ -67,21 +67,105 @@ class ContentFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
                 } catch (e: Exception) {
                     binding.toImgProgress.visibility = View.GONE
                 }
+                try {
+                    binding.downSizedProgress.visibility = View.VISIBLE
+
+                    Glide.with(binding.root)
+                        .load(bundle.getString("downSized"))
+                        .listener(object : RequestListener<Drawable> {
+                            override fun onLoadFailed(
+                                e: GlideException?,
+                                model: Any?,
+                                target: com.bumptech.glide.request.target.Target<Drawable>?,
+                                isFirstResource: Boolean
+                            ): Boolean {
+                                binding.downSizedProgress.visibility = View.GONE
+                                return false
+                            }
+
+                            override fun onResourceReady(
+                                resource: Drawable?,
+                                model: Any?,
+                                target: com.bumptech.glide.request.target.Target<Drawable>?,
+                                dataSource: com.bumptech.glide.load.DataSource?,
+                                isFirstResource: Boolean
+                            ): Boolean {
+                                binding.downSizedProgress.visibility = View.GONE
+                                return false
+                            }
+
+                        })
+                        .into(binding.downSized)
+                } catch (e: Exception) {
+
+                    binding.downSizedProgress.visibility = View.GONE
+                }
+                try {
+                    binding.downSizedSmallProgress.visibility = View.VISIBLE
+
+                    Glide.with(binding.root)
+                        .load(bundle.getString("downSizedSmall"))
+                        .listener(object : RequestListener<Drawable> {
+                            override fun onLoadFailed(
+                                e: GlideException?,
+                                model: Any?,
+                                target: com.bumptech.glide.request.target.Target<Drawable>?,
+                                isFirstResource: Boolean
+                            ): Boolean {
+                                binding.downSizedSmallProgress.visibility = View.GONE
+                                return false
+                            }
+
+                            override fun onResourceReady(
+                                resource: Drawable?,
+                                model: Any?,
+                                target: com.bumptech.glide.request.target.Target<Drawable>?,
+                                dataSource: com.bumptech.glide.load.DataSource?,
+                                isFirstResource: Boolean
+                            ): Boolean {
+                                binding.downSizedSmallProgress.visibility = View.GONE
+                                return false
+                            }
+
+                        })
+                        .into(binding.downSizedSmall)
+                } catch (e: Exception) {
+                    binding.downSizedSmallProgress.visibility = View.GONE
+                }
+                try {
+                    binding.originalMp4Progress.visibility = View.VISIBLE
+
+                    Glide.with(binding.root)
+                        .load(bundle.getString("originalMp4"))
+                        .listener(object : RequestListener<Drawable> {
+                            override fun onLoadFailed(
+                                e: GlideException?,
+                                model: Any?,
+                                target: com.bumptech.glide.request.target.Target<Drawable>?,
+                                isFirstResource: Boolean
+                            ): Boolean {
+                                binding.originalMp4Progress.visibility = View.GONE
+                                return false
+                            }
+
+                            override fun onResourceReady(
+                                resource: Drawable?,
+                                model: Any?,
+                                target: com.bumptech.glide.request.target.Target<Drawable>?,
+                                dataSource: com.bumptech.glide.load.DataSource?,
+                                isFirstResource: Boolean
+                            ): Boolean {
+                                binding.originalMp4Progress.visibility = View.GONE
+                                return false
+                            }
+
+                        })
+                        .into(binding.originalMp4)
+                } catch (e: Exception) {
+                    binding.originalMp4Progress.visibility = View.GONE
+                }
             }
-/*            val imageRc: RecyclerView = view.findViewById(R.id.imagesRcView)
-            imageRc.adapter = rcAdapter
-            rcAdapter.recordsList = ArrayList()
-            val photoPathSplit = bundle.getString("url")?.split(";")
-            photoPathSplit?.forEach { item ->
-                rcAdapter.addPhotoRecord(
-                    PhotoRecord(item)
-                )
-            }
-            rcAdapter.notifyItemChanged(rcAdapter.itemCount)
-            val linearLayoutManager =
-                LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, true)
-            linearLayoutManager.stackFromEnd = true
-            imageRc.layoutManager = linearLayoutManager*/
+
 
         }
         super.onViewCreated(view, savedInstanceState)

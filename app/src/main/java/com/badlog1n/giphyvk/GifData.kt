@@ -8,5 +8,8 @@ data class GifData(
     val rating: String,
     val time: String,
     val link: String,
-    val bigGif: String
+    val bigGif: String,
+    val downSized: String,
+    val downSizedSmall: String,
+    val originalMp4: String,
 )
