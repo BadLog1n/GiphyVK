@@ -8,4 +8,5 @@ data class GifData(
     val rating: String,
     val time: String,
     val link: String,
+    val bigGif: String
 )

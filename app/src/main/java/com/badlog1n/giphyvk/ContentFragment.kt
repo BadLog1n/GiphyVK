@@ -39,7 +39,7 @@ class ContentFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
                     binding.toImgProgress.visibility = View.VISIBLE
 
                     Glide.with(binding.root)
-                        .load(bundle.getString("url"))
+                        .load(bundle.getString("bigGif"))
                         .listener(object : RequestListener<Drawable> {
                             override fun onLoadFailed(
                                 e: GlideException?,

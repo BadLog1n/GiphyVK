@@ -15,7 +15,9 @@ class SearchApi {
                 val time = jsonObject.getString("import_datetime")
                 val rating = jsonObject.getString("rating")
                 val link = jsonObject.getString("url")
-                list.add(GifData(url, title, username, rating, time, link))
+                val bigGif = jsonObject.getJSONObject("images").getJSONObject("original")
+                    .getString("url")
+                list.add(GifData(url, title, username, rating, time, link, bigGif))
             } catch (e: Exception) {
                 continue
             }

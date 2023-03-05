@@ -139,6 +139,7 @@ class SearchFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
         bundle.putString("rating", gifData?.rating)
         bundle.putString("time", gifData?.time)
         bundle.putString("link", gifData?.link)
+        bundle.putString("bigGif", gifData?.bigGif)
         view?.findNavController()?.navigate(R.id.action_searchFragment_to_contentFragment, bundle)
 
     }
