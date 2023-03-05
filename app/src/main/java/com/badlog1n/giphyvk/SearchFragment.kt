@@ -9,8 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -145,6 +143,7 @@ class SearchFragment : Fragment(), ContentPhotoAdapter.RecyclerViewEvent {
         bundle.putString("link", gifData?.link)
         bundle.putString("bigGif", gifData?.bigGif)
         view?.findNavController()?.navigate(R.id.action_searchFragment_to_contentFragment, bundle)
+        view?.hideKeyboard()
 
     }
 
